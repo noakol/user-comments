@@ -3,9 +3,7 @@ const md5 = require('blueimp-md5');
 
 const retriveAll = function(req, res) {
     Comments.find({}, function(err, comments) {
-        if (comments && comments.length) {
             res.send(comments.reverse());
-        }
     });
 };
 
@@ -33,10 +31,9 @@ const create = function(req, res) {
 }
 
 const retrive = function(req, res) {
-    Comments.find(req.query, function(err, comments) {
-        if (comments && comments.length) {
-            res.send(comments.reverse());
-        }
+    const regexp = new RegExp("^"+ req.query.username);
+    Comments.find({username: regexp}, function(err, comments) {
+        res.send(comments.reverse());
     });
 };
 
