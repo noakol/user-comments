@@ -2,9 +2,9 @@ const Comments = require('../models/comments.model');
 const md5 = require('blueimp-md5'); 
 
 const retriveAll = function(req, res) {
-    Comments.find({}, function(err, review) {
-        if (review && review.length) {
-            res.send(review.reverse());
+    Comments.find({}, function(err, comments) {
+        if (comments && comments.length) {
+            res.send(comments.reverse());
         }
     });
 };
@@ -14,7 +14,7 @@ const create = function(req, res) {
     const imgHash = md5((req.body.username).trim().toLowerCase());
     const imgUrl = 'https://www.gravatar.com/avatar/' + imgHash + '?d=mp';
 
-    let review = new Comments(
+    let comment = new Comments(
         {
             username: req.body.username,
             id: req.body.id,
@@ -23,7 +23,7 @@ const create = function(req, res) {
         }
     );
 
-    review.save(function(err) {
+    comment.save(function(err) {
         if (err) {
             console.log(err);
             return err;
@@ -33,9 +33,9 @@ const create = function(req, res) {
 }
 
 const retrive = function(req, res) {
-    Comments.find(req.query, function(err, reviews) {
-        if (review && review.length) {
-            res.send(review.reverse());
+    Comments.find(req.query, function(err, comments) {
+        if (comments && comments.length) {
+            res.send(comments.reverse());
         }
     });
 };

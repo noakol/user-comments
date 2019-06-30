@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let reviewSchema = new Schema({
+let commentsSchema = new Schema({
     id: {type: String, required: false, max: 100},
     username: {type: String, required: true},
     text: {type: String, require: true, max: 100},
@@ -9,4 +9,4 @@ let reviewSchema = new Schema({
 });
 
 // Export the model
-module.exports = mongoose.model('Review', reviewSchema);
+module.exports = mongoose.model('Comments', commentsSchema);
